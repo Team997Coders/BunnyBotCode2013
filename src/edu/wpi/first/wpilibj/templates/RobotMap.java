@@ -7,15 +7,35 @@ package edu.wpi.first.wpilibj.templates;
  * floating around.
  */
 public class RobotMap { 
+    
+    //motor slots
     public static final int leftMotorSlot = 9;
     public static final int rightMotorSlot = 10;
+    
+    //pnuematics slots
+    public static final int solenoidModule = 1;
+    //kicker slots
     public static final int kickerSolenoid = 1;
     public static final int kickerSolenoid2 = 3;
+    //dumper slots
     public static final int dumperSolenoid = 2;
     public static final int dumperSolenoid2 = 4;
-    public static final int myCompressor = 2;
-    public static final int myCompressor2 = 1;
+    //compressor slots
+    public static final int CompressorPressureSwitch = 2;
+    public static final int myCompressor = 1;
     
+    //encoder slots
+    public static final int leftEncoderSlot1 = 5;
+    public static final int leftEncoderSlot2 = 6;
+    public static final int rightEncoderSlot1 = 3;
+    public static final int rightEncoderSlot2 = 4;
+    
+    //gyro slots and information
+    public static final int GyroSlot = 1;
+    public static double gyroSensitivity = .007;
+    
+    
+    //public static final int UltrasonicSlot = ;
     
     //constants
     public static final double deadband = .15;  
@@ -29,6 +49,6 @@ public class RobotMap {
     
     public static final int DumperButton = 1;
     public static final String DumperJoystick = "right";
-    public static int solenoidModule = 1;
+    
     
 }

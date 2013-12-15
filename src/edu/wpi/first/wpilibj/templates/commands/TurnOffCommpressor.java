@@ -8,12 +8,12 @@ package edu.wpi.first.wpilibj.templates.commands;
  *
  * @author Team 997
  */
-public class ExtendDumperCommand extends CommandBase {
+public class TurnOffCommpressor extends CommandBase {
     
-    public ExtendDumperCommand() {
+    public TurnOffCommpressor() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    requires(myPnumatics);
+        requires(myPnumatics);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +22,7 @@ public class ExtendDumperCommand extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        myPnumatics.extenddumper();
+        myPnumatics.CommpressorOff();
     }
 
     // Make this return true when this Command no longer needs to run execute()

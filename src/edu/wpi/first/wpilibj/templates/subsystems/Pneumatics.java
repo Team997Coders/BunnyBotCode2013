@@ -5,6 +5,7 @@
 package edu.wpi.first.wpilibj.templates.subsystems;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -33,7 +34,7 @@ public class Pneumatics extends Subsystem {
         kickerSolenoid2 = new Solenoid(moduleNumber,kickerslot2);
         dumperSolenoid2 = new Solenoid(moduleNumber,dumperslot2);
         myCompressor = new Compressor(compressorslot1,compressorslot2);
-        myCompressor.start(); 
+       compressorOn();
     }
    
     public void extendkicker(){
@@ -71,5 +72,10 @@ public class Pneumatics extends Subsystem {
     
     public void smartdashboard(){
         SmartDashboard.putData("pnuematics info", this);
+        SmartDashboard.putBoolean("compressor is full", myCompressor.getPressureSwitchValue());
+    }
+
+    public void compressorOn() {
+        myCompressor.start();
     }
 }

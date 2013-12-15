@@ -8,12 +8,13 @@ package edu.wpi.first.wpilibj.templates.commands;
  *
  * @author Team 997
  */
-public class ExtendDumperCommand extends CommandBase {
-    
-    public ExtendDumperCommand() {
+public class SetGear extends CommandBase {
+    double gearToSet;
+    public SetGear(double gear) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    requires(myPnumatics);
+        gearToSet = gear;
+        requires(subDriveTrain);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +23,7 @@ public class ExtendDumperCommand extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        myPnumatics.extenddumper();
+        subDriveTrain.setGear(gearToSet);
     }
 
     // Make this return true when this Command no longer needs to run execute()

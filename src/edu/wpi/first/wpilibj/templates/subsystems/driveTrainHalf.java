@@ -4,6 +4,7 @@
  */
 package edu.wpi.first.wpilibj.templates.subsystems;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -13,12 +14,21 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class driveTrainHalf extends Subsystem {
     private Victor myVictor;
-    public driveTrainHalf (int slot1){
+    private Encoder myEncoder;
+    public driveTrainHalf (int slot1,int Eslot1,int Eslot2){
         myVictor = new Victor(slot1);
+        myEncoder = new Encoder(Eslot1,Eslot2);
         
     }
     public void setSpeed(double speed){
         myVictor.set(speed);
+    }
+    public double getEncoder() {
+        return myEncoder.get();
+    }
+    public void resetEncoder() {
+        myEncoder.start();
+        myEncoder.reset();
     }
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

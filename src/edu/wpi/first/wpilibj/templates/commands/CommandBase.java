@@ -19,15 +19,22 @@ public abstract class CommandBase extends Command {
     public static OI oi;
     // Create a single static instance of all of your subsystems
     public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
-     public static driveTrainFull subDriveTrain = new driveTrainFull(RobotMap.leftMotorSlot, RobotMap.rightMotorSlot);
+     public static driveTrainFull subDriveTrain = new driveTrainFull(
+             RobotMap.leftMotorSlot,
+             RobotMap.rightMotorSlot,
+             RobotMap.leftEncoderSlot1,
+             RobotMap.leftEncoderSlot2,
+             RobotMap.rightEncoderSlot1,
+             RobotMap.rightEncoderSlot2,
+             RobotMap.GyroSlot);
      public static Pneumatics myPnumatics = new Pneumatics(
              RobotMap.solenoidModule,
              RobotMap.kickerSolenoid, 
              RobotMap.kickerSolenoid2, 
              RobotMap.dumperSolenoid, 
              RobotMap.dumperSolenoid2,
-             RobotMap.myCompressor, 
-             RobotMap.myCompressor2);
+             RobotMap.CompressorPressureSwitch, 
+             RobotMap.myCompressor);
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
         // will), constructing it during the construction of CommandBase (from
