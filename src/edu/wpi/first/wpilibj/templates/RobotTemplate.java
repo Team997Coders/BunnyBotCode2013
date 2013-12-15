@@ -75,6 +75,6 @@ public class RobotTemplate extends IterativeRobot {
     public void smartDashboard() {
         CommandBase.myPnumatics.smartdashboard();
         CommandBase.subDriveTrain.smartdashboard();
-        CommandBase.oi.smardashboard();
+        CommandBase.oi.smartdashboard();
     }
 }

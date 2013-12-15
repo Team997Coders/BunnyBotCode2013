@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.templates.commands.DumpWithTimer;
 import edu.wpi.first.wpilibj.templates.commands.ExtendDumperCommand;
 import edu.wpi.first.wpilibj.templates.commands.ExtendKickerCommand;
 import edu.wpi.first.wpilibj.templates.commands.KickWithTimer;
+import edu.wpi.first.wpilibj.templates.commands.ResetEncodersCommand;
 import edu.wpi.first.wpilibj.templates.commands.RetractDumperCommand;
 import edu.wpi.first.wpilibj.templates.commands.RetractKickerCommand;
 import edu.wpi.first.wpilibj.templates.commands.SetGear;
@@ -40,11 +41,13 @@ public class OI {
     private Button HighGear;
     private Button MidGear;
     private Button  LowGear;
+    private Button ResetEncoderButton;
     public OI(){
     leftJoystick = new Joystick(1);
     rightJoystick = new Joystick(2);
     GamePad = new Joystick(3);
     
+    ResetEncoderButton = new InternalButton();
     ExtendKickerButton = new InternalButton();
     RetractKickerButton = new InternalButton();
     ExtendDumperButton  = new InternalButton();
@@ -74,7 +77,9 @@ public class OI {
     MidGear.whenPressed(new SetGear(.5));
     HighGear.whenPressed(new SetGear(1));
     LowGear.whenPressed(new SetGear(.25));
+    ResetEncoderButton.whenPressed(new ResetEncodersCommand());
     
+    SmartDashboard.putData("reset encoder", ResetEncoderButton);
     SmartDashboard.putData("extend kicker", ExtendKickerButton);
     SmartDashboard.putData("retract kicker", RetractKickerButton);
     SmartDashboard.putData("extend dumper", ExtendDumperButton);
@@ -96,10 +101,10 @@ public class OI {
         return rightJoystick.getY();
     }
 
-    public void smardashboard() {
+    public void smartdashboard() {
         SmartDashboard.putNumber("left Joystick y axis" , getLeftY());
         SmartDashboard.putNumber("right Joystick y axis", getRightY());
-        SmartDashboard.putNumber("z axis multiplied", getZAxisMultiplied());
+        SmartDashboard.putNumber("z axis multiplied", getZAxisMultiplied()); 
     }
 
     private double getZAxisMultiplied() {
