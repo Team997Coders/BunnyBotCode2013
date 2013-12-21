@@ -19,7 +19,7 @@ public class DriveStraightWithEncoders extends CommandBase {
         // eg. requires(chassis);
         encoderCounts = (int) approximateFeet*240-160;
         useGyro = useingGyro;
-       
+        
         
         requires(subDriveTrain);
     }

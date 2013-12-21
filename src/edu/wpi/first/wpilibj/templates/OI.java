@@ -48,11 +48,13 @@ public class OI {
     private Button Drive90DegreesCounterClockwise;
     private Button ReverseDrive;
     private Button TankDrive;
+    private Button thirdGear;
     
     public OI(){
     leftJoystick = new Joystick(1);
     rightJoystick = new Joystick(2);
     GamePad = new Joystick(3);
+    
     
     ResetEncoderButton = new InternalButton();
     ExtendKickerButton = new InternalButton();
@@ -68,12 +70,14 @@ public class OI {
     setToHalfGear = new InternalButton();
     HighGear = new JoystickButton(GamePad, 8);
     MidGear = new JoystickButton(GamePad, 6);
-    LowGear = new JoystickButton(GamePad, 4);
+    thirdGear = new JoystickButton(GamePad, 4);
+    LowGear = new JoystickButton(GamePad, 2);
     DriveEncoderCounts = new InternalButton();
     Drive90DegreesCounterClockwise = new InternalButton();
     TankDrive = new JoystickButton(GamePad, 5);
     ReverseDrive = new JoystickButton(GamePad, 7); 
     
+    thirdGear.whenPressed(new SetGear(.33));
     KickButton.whenPressed(new KickWithTimer());
     DumpButton.whenPressed(new KickWithTimer());
     ExtendKickerButton.whenPressed(new ExtendKickerCommand());
