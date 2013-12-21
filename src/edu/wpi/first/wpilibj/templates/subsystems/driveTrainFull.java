@@ -27,11 +27,11 @@ private AnalogChannel directVoltageGyro;
 public driveTrainFull (int leftslot, int rightslot,int leftEslot1,int leftEslot2,int rightEslot1,int rightEslot2,int GSlot){
 lefthalf = new driveTrainHalf(leftslot,leftEslot1,leftEslot2);
 righthalf = new driveTrainHalf (rightslot,rightEslot1,rightEslot2);
-myGyro = new Gyro(2);
+myGyro = new Gyro(GSlot);
 myGyro.setSensitivity(RobotMap.gyroSensitivity);
 CurrentGear = .5;
 resetEncoders();
-directVoltageGyro = new AnalogChannel(GSlot);
+directVoltageGyro = new AnalogChannel(2);
 
 
 //myUltrasonic = new Ultrasonic(RobotMap.UltrasonicSlot);
@@ -42,13 +42,13 @@ public void setGear(double gear){
 }
 
 public void MoveLeftHalf(double speed){
-lefthalf.setSpeed(deadband(-speed*(CurrentGear)));
-SmartDashboard.putNumber("left speed", deadband(-speed*CurrentGear));
+lefthalf.setSpeed(deadband(speed)*(CurrentGear));
+SmartDashboard.putNumber("left speed", deadband(speed)*CurrentGear);
 
 }
 public void MoveRightHalf (double speed){
-righthalf.setSpeed(deadband(CurrentGear*speed));
-SmartDashboard.putNumber("right speed", deadband(CurrentGear*speed));
+righthalf.setSpeed(-CurrentGear*deadband(speed));
+SmartDashboard.putNumber("right speed",- CurrentGear*deadband(speed));
 }
 
 public double deadband(double value) {
@@ -68,7 +68,8 @@ public double getEncoder(boolean leftSide){
     if (leftSide){
         return lefthalf.getEncoder();
     } else {
-        return -righthalf.getEncoder();
+        return 
+                -righthalf.getEncoder();
                 
     }
    
@@ -102,9 +103,13 @@ public double getEncoder(boolean leftSide){
     public void smartdashboard(){
          SmartDashboard.putNumber("Gyro value", myGyro.getAngle() );
          SmartDashboard.putData("drive train info", this);
-         SmartDashboard.putNumber("left Encoder", lefthalf.getEncoder());
-         SmartDashboard.putNumber("right encoder", righthalf.getEncoder());
+         SmartDashboard.putNumber("left Encoder", getEncoder(true));
+         SmartDashboard.putNumber("right encoder", getEncoder(false));
          SmartDashboard.putNumber("Gyro direct value",directVoltageGyro.getVoltage());
          //SmartDashboard.putNumber("Ultrasonic", getUltrasonic());
+    }
+    public void ResetSensers() {
+        resetGyro();
+        resetEncoders();
     }
 }

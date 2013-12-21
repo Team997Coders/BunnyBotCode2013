@@ -3,20 +3,22 @@ package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
 import edu.wpi.first.wpilibj.buttons.InternalButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.templates.commands.DumpWithTimer;
+import edu.wpi.first.wpilibj.templates.commands.DriveStraightWithEncoders;
 import edu.wpi.first.wpilibj.templates.commands.ExtendDumperCommand;
 import edu.wpi.first.wpilibj.templates.commands.ExtendKickerCommand;
 import edu.wpi.first.wpilibj.templates.commands.KickWithTimer;
-import edu.wpi.first.wpilibj.templates.commands.ResetEncodersCommand;
+import edu.wpi.first.wpilibj.templates.commands.ResetSensorsCommand;
 import edu.wpi.first.wpilibj.templates.commands.RetractDumperCommand;
 import edu.wpi.first.wpilibj.templates.commands.RetractKickerCommand;
+import edu.wpi.first.wpilibj.templates.commands.ReverseDrive;
 import edu.wpi.first.wpilibj.templates.commands.SetGear;
+import edu.wpi.first.wpilibj.templates.commands.Turn90WithGyro;
 import edu.wpi.first.wpilibj.templates.commands.TurnOffCommpressor;
 import edu.wpi.first.wpilibj.templates.commands.TurnOnCompressor;
+import edu.wpi.first.wpilibj.templates.commands.tankDrive;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -42,6 +44,11 @@ public class OI {
     private Button MidGear;
     private Button  LowGear;
     private Button ResetEncoderButton;
+    private Button DriveEncoderCounts;
+    private Button Drive90DegreesCounterClockwise;
+    private Button ReverseDrive;
+    private Button TankDrive;
+    
     public OI(){
     leftJoystick = new Joystick(1);
     rightJoystick = new Joystick(2);
@@ -62,9 +69,13 @@ public class OI {
     HighGear = new JoystickButton(GamePad, 8);
     MidGear = new JoystickButton(GamePad, 6);
     LowGear = new JoystickButton(GamePad, 4);
+    DriveEncoderCounts = new InternalButton();
+    Drive90DegreesCounterClockwise = new InternalButton();
+    TankDrive = new JoystickButton(GamePad, 5);
+    ReverseDrive = new JoystickButton(GamePad, 7); 
     
     KickButton.whenPressed(new KickWithTimer());
-    DumpButton.whenPressed(new DumpWithTimer());
+    DumpButton.whenPressed(new KickWithTimer());
     ExtendKickerButton.whenPressed(new ExtendKickerCommand());
     RetractKickerButton.whenPressed(new RetractKickerCommand());
     ExtendDumperButton.whenPressed(new ExtendDumperCommand());
@@ -77,9 +88,13 @@ public class OI {
     MidGear.whenPressed(new SetGear(.5));
     HighGear.whenPressed(new SetGear(1));
     LowGear.whenPressed(new SetGear(.25));
-    ResetEncoderButton.whenPressed(new ResetEncodersCommand());
+    ResetEncoderButton.whenPressed(new ResetSensorsCommand());
+    DriveEncoderCounts.whenPressed(new DriveStraightWithEncoders(RobotMap.DistanceToDriveIinFeet,true));
+    Drive90DegreesCounterClockwise.whenPressed(new Turn90WithGyro(false));
+    TankDrive.whenPressed(new tankDrive());
+    ReverseDrive.whenPressed(new ReverseDrive());
     
-    SmartDashboard.putData("reset encoder", ResetEncoderButton);
+    SmartDashboard.putData("reset sensers", ResetEncoderButton);
     SmartDashboard.putData("extend kicker", ExtendKickerButton);
     SmartDashboard.putData("retract kicker", RetractKickerButton);
     SmartDashboard.putData("extend dumper", ExtendDumperButton);
@@ -89,16 +104,18 @@ public class OI {
     SmartDashboard.putData("set full gear", setToFullGear);
     SmartDashboard.putData("set to half gear", setToHalfGear);
     SmartDashboard.putData("set to quarter gear",setToQuarterGear);
+    SmartDashboard.putData("Autonomous Test",DriveEncoderCounts);
+    SmartDashboard.putData("turn 90 degrees counterclosckwise", Drive90DegreesCounterClockwise);
     }
     
     
     
-    
+    //negatives to make positive forward
     public double getLeftY(){
-        return leftJoystick.getY();
+        return -leftJoystick.getY();
         }
     public double getRightY(){
-        return rightJoystick.getY();
+        return -rightJoystick.getY();
     }
 
     public void smartdashboard() {

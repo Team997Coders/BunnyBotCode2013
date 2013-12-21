@@ -50,5 +50,12 @@ public class RobotMap {
     public static final int DumperButton = 1;
     public static final String DumperJoystick = "right";
     
+    static final double DistanceToDriveIinFeet = 14.5;
+    public static final double LeftAutonomousSpeed = .5;
+    public static final double rightAuronomousSpeed = .53;
+    public static double Turn90Distance = 220;
+    public static double gyroFactor = .1;
+    
+    
     
 }

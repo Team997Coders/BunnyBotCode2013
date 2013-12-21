@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.templates.commands.AutonomousRoutine;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 import edu.wpi.first.wpilibj.templates.commands.ExampleCommand;
 
@@ -32,7 +33,7 @@ public class RobotTemplate extends IterativeRobot {
      */
     public void robotInit() {
         // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
+        autonomousCommand = new AutonomousRoutine();
 
         // Initialize all subsystems
         CommandBase.init();
@@ -48,6 +49,7 @@ public class RobotTemplate extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        smartDashboard();
     }
 
     public void teleopInit() {
@@ -76,5 +78,11 @@ public class RobotTemplate extends IterativeRobot {
         CommandBase.myPnumatics.smartdashboard();
         CommandBase.subDriveTrain.smartdashboard();
         CommandBase.oi.smartdashboard();
+    }
+    public void disabledInit() {
+        System.out.println("ready");
+    }
+    public void disabledPeriodic() {
+        
     }
 }

@@ -10,11 +10,19 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  * @author Team 997
  */
-public class DriveStraightAndDump extends CommandGroup {
+public class AutonomousRoutine extends CommandGroup {
     
-    public DriveStraightAndDump() {
-        addSequential(new DriveStraightWithEncoders(500,true));
+    public AutonomousRoutine() {
+        addSequential(new SetGear(.5));
+        addSequential(new DriveStraightWithEncoders(14.5,true));
+        addSequential(new Wait(), .5);
+        addSequential(new Turn90WithGyro(false));
+        addSequential(new Wait(), .5);
+        addSequential(new DriveStraightWithEncoders(6.5,true));
+        addSequential(new Wait(), .5);
         addSequential(new DumpWithTimer());
+        addSequential(new DriveStraightBackwards(2));
+        
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

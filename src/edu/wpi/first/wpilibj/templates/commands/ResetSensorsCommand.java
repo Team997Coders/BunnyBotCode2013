@@ -8,9 +8,9 @@ package edu.wpi.first.wpilibj.templates.commands;
  *
  * @author Team 997
  */
-public class ResetEncodersCommand extends CommandBase {
+public class ResetSensorsCommand extends CommandBase {
     
-    public ResetEncodersCommand() {
+    public ResetSensorsCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(subDriveTrain);
@@ -22,12 +22,12 @@ public class ResetEncodersCommand extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        subDriveTrain.resetEncoders();
+        subDriveTrain.ResetSensers();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
