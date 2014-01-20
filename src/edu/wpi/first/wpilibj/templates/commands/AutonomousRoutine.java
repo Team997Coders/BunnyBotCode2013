@@ -14,9 +14,9 @@ public class AutonomousRoutine extends CommandGroup {
     
     public AutonomousRoutine() {
         addSequential(new SetGear(.5));
-        addSequential(new DriveStraightWithEncoders(25,true));
+        addSequential(new DriveStraightWithEncoders(24,true));
         addSequential(new Wait(), .5);
-        addSequential(new Turn90WithGyro(false));
+        addSequential(new Turn90WithGyro(true));
         addSequential(new Wait(), .5);
         addSequential(new DriveStraightWithEncoders(4.5,true));
         addSequential(new Wait(), .5);
